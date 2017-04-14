@@ -63,19 +63,13 @@ public class Main {
         }
     }
 
-    private static void showSeats(JSONObject bus) {
-
-        try {
-            JSONArray seats = bus.getJSONArray("seats");
-            for (int i = 0; i < seats.length(); i++) {
-                JSONObject seat = (JSONObject) seats.get(i);
-                System.out.println(seat.getInt("seatId"));
-                System.out.println(seat.getBoolean("isFree"));
-                System.out.println("============================");
-            }
-        } catch (JSONException e) {
-            System.out.println("Invalid server response");
+    private static void showSeats(JSONObject bus) throws JSONException {
+        JSONArray seats = bus.getJSONArray("seats");
+        for (int i = 0; i < seats.length(); i++) {
+            JSONObject seat = (JSONObject) seats.get(i);
+            System.out.println(seat.getInt("seatId"));
+            System.out.println(seat.getBoolean("isFree"));
+            System.out.println("============================");
         }
-
     }
 }
