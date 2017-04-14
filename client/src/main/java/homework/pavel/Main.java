@@ -38,15 +38,22 @@ public class Main {
                     case 1:
                         String getBusUrl = "http://localhost:8080/get-bus/coolBus/";
                         WebResource busWebResource = client.resource(getBusUrl);
-                        ClientResponse response = busWebResource.accept("application/json").get(ClientResponse.class);
-                        String entity = response.getEntity(String.class);
-                        showSeats(new JSONObject(entity));
+                        ClientResponse getBusResponse = busWebResource.accept("application/json").get(ClientResponse.class);
+                        if (getBusResponse.getStatus() == 200) {
+                            String entity = getBusResponse.getEntity(String.class);
+                            showSeats(new JSONObject(entity));
+                        }
                         break;
                     case 2:
                         String getReservation = "http://localhost:8080/get-bus/coolBus/reserve";
                         WebResource reservationWebResource = client.resource(getReservation);
-                        reservationWebResource.accept("application/json").get(ClientResponse.class);
-                        System.out.println("reserved");
+                        ClientResponse reservationResponse = reservationWebResource.accept("application/json").get(ClientResponse.class);
+                        if (reservationResponse.getStatus() != 406 && reservationResponse.getStatus() == 200) {
+                            System.out.println("reserved");
+                        } else {
+                            System.out.println("This bus is full");
+                        }
+
                         break;
                     case 3:
                         System.out.println("Exit selected");
