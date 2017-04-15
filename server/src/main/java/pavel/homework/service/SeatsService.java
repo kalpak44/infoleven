@@ -6,8 +6,6 @@ import pavel.homework.domain.Bus;
 import pavel.homework.domain.Seat;
 import pavel.homework.service.exception.NoSeatsFreeFoundException;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 /**
  * Created on 14.04.17.
  */
@@ -15,7 +13,6 @@ import java.util.concurrent.atomic.AtomicReference;
 public class SeatsService {
 
     private BusesService busesService;
-    private AtomicReference<Seat[]> cache = new AtomicReference<Seat[]>();
 
     @Autowired
     public SeatsService(BusesService busesService) {
@@ -28,7 +25,7 @@ public class SeatsService {
     }
 
     public Seat getReservation(final Bus bus) {
-        // TODO: 015 15.04.17 without synchronized block
+        // without synchronized block realized in  with_atomic branch
         synchronized (this) {
             for (Seat currentSeat : bus.getSeats()) {
                 if (currentSeat.getIsFree()) {
@@ -39,5 +36,4 @@ public class SeatsService {
             throw new NoSeatsFreeFoundException();
         }
     }
-
 }

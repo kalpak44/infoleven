@@ -13,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Service
 public class BusesService {
-
     private volatile Map<String, Bus> buses = new HashMap<String, Bus>();
 
     public void addBus(final Bus bus) {
