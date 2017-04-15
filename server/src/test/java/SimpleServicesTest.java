@@ -50,20 +50,18 @@ public class SimpleServicesTest {
         final int seatsCount = 25000;
         busesService.addBus(new Bus("multiThread", seatsCount));
 
-        MultiThreadedTester stressTester = new MultiThreadedTester(seatsCount);
+        MultiThreadedTester stressTester = new MultiThreadedTester(12500);
 
-
-            stressTester.stress(new Runnable() {
-                public void run() {
-                    seatsService.getReservation("multiThread");
-                }
-            });
-
-            Seat[] seats = busesService.getBus("multiThread").getSeats();
-            for (Seat seat : seats) {
-                Assert.assertFalse(seat.getIsFree());
+        stressTester.stress(new Runnable() {
+            public void run() {
+                seatsService.getReservation("multiThread");
             }
+        });
 
+        Seat[] seats = busesService.getBus("multiThread").getSeats();
+        for (Seat seat : seats) {
+            Assert.assertFalse(seat.getIsFree());
+        }
 
     }
 }

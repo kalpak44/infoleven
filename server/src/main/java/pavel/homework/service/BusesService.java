@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pavel.homework.domain.Bus;
 import pavel.homework.service.exception.NoBusFoundException;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class BusesService {
 
-    private final Map<String, Bus> buses = new ConcurrentHashMap<String, Bus>();
+    private volatile Map<String, Bus> buses = new HashMap<String, Bus>();
 
     public void addBus(final Bus bus) {
         this.buses.put(bus.getBusId(), bus);
