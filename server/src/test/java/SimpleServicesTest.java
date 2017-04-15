@@ -41,7 +41,7 @@ public class SimpleServicesTest {
         Seat[] busSeats = busesService.getBus("busWithFreeSeats").getSeats();
         Assert.assertEquals(busSeats.length, 50);
         for (Seat seat : busSeats) {
-            Assert.assertTrue(seat.getIsFree());
+            Assert.assertTrue(seat.isFree());
         }
     }
 
@@ -60,7 +60,7 @@ public class SimpleServicesTest {
 
         Seat[] seats = busesService.getBus("multiThread").getSeats();
         for (Seat seat : seats) {
-            Assert.assertFalse(seat.getIsFree());
+            Assert.assertFalse(seat.isFree());
         }
 
     }

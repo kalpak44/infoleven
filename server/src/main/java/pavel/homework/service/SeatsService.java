@@ -28,16 +28,12 @@ public class SeatsService {
     }
 
     public Seat getReservation(final Bus bus) {
-        // TODO: 015 15.04.17 without synchronized block
-        synchronized (this) {
-            for (Seat currentSeat : bus.getSeats()) {
-                if (currentSeat.getIsFree()) {
-                    currentSeat.setIsFree(false);
-                    return currentSeat;
-                }
+        for (Seat seat : bus.getSeats()) {
+            if (seat.reserve()) {
+                return seat;
             }
-            throw new NoSeatsFreeFoundException();
         }
+        throw new NoSeatsFreeFoundException();
     }
 
 }
