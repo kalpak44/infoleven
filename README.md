@@ -2,3 +2,6 @@ Implement a simple command line Java application for booking bus seats. For simp
 
 If you are familiar with the Spring framework, use any of its concepts that you think would be appropriate.
 
+
+ -- Write unit tests for the application. Additionally write a test for the multi-threaded scenario (i.e showing that the application is thread-safe)
+ -- Try to redesign your application so that it is still thread-safe, but without using locking mechanisms (i.e. without synchronization or java.util.concurrent.locks)
